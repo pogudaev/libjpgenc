@@ -527,9 +527,14 @@ static void pixel_encode_rgb_rgba(int src_index, const uint8_t* src_data, float 
 static void pixel_encode_yuyv(int src_index, const uint8_t* src_data, float *luma, float *cb, float *cr)
 {
     *luma = (src_data[src_index + 0] - 127);
-    int noparity = src_index % 2;
-    *cb   = (((noparity == 0) ? src_data[src_index + 1] : src_data[src_index - 1]) - 127);
-    *cr   = (((noparity == 0) ? src_data[src_index + 3] : src_data[src_index + 1]) - 127);
+	int noparity = src_index % 4;
+	if (noparity == 0){
+		*cb   = src_data[src_index + 1] - 127;
+		*cr   = src_data[src_index + 3] - 127;
+	} else {
+		*cb   = src_data[src_index - 1] - 127;
+		*cr   = src_data[src_index + 1] - 127;
+	}
 }
 
 static void write_block_encode(JPGEncObject* state, int x, int y, int width, int height,
