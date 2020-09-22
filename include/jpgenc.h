@@ -23,20 +23,19 @@ freely, subject to the following restrictions:
 #include <stdint.h>
 #include <stdio.h>
 
-typedef void jpgenc_write_func(void* context, const void *data, size_t size);
+typedef void jpgenc_write_func(void *context, const void *data, size_t size);
 
-typedef enum
-{
-    JPGEncFormat_RGB = 3,
-    JPGEncFormat_RGBA = 4,
-    JPGEncFormat_YUYV = 2
+typedef enum {
+	JPGEncFormat_RGB = 3,
+	JPGEncFormat_RGBA = 4,
+	JPGEncFormat_YUYV = 2
 } JPGEncFormat;
 
-int jpgenc_encode(jpgenc_write_func* func,
-                         void* context,
-                         int width,
-                         int height,
-                         JPGEncFormat src_format,
-                         const uint8_t* src_data);
+int jpgenc_encode(jpgenc_write_func *func,
+                  void *context,
+                  int width,
+                  int height,
+                  JPGEncFormat src_format,
+                  const uint8_t *src_data);
 
 #endif // JPGENC_H
