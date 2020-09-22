@@ -260,7 +260,7 @@ static void jpgenc_write(JPGEncObject* state, const void* data, size_t num_bytes
 
     // Flush the buffer.
     if ( state->output_buffer_count == JPGENC_BUFFER_SIZE - 1 ) {
-        state->write_context.func(state->write_context.context, state->output_buffer, (int)state->output_buffer_count);
+		state->write_context.func(state->write_context.context, state->output_buffer, state->output_buffer_count);
         state->output_buffer_count = 0;
     }
 
@@ -271,7 +271,6 @@ static void jpgenc_write(JPGEncObject* state, const void* data, size_t num_bytes
 }
 
 
-//Потенциально опасно на big-endian, требуется подробный анализ
 static void jpgenc_write_bits(JPGEncObject* state,
                               uint32_t* bitbuffer, uint32_t* location,
                               uint16_t num_bits, uint16_t bits)
@@ -651,7 +650,7 @@ static int jpgenc_encode_main(JPGEncObject* state,
     jpgenc_write(state, &EOI, sizeof(uint16_t), 1);
 
     if (state->output_buffer_count) {
-        state->write_context.func(state->write_context.context, state->output_buffer, (int)state->output_buffer_count);
+		state->write_context.func(state->write_context.context, state->output_buffer, state->output_buffer_count);
         state->output_buffer_count = 0;
     }
 

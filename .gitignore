@@ -4,6 +4,7 @@ Makefile
 libjpgenc.so
 cmake_install.cmake
 install_manifest.txt
+*.user
 build/
 
 

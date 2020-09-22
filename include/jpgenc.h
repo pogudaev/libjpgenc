@@ -21,8 +21,9 @@ freely, subject to the following restrictions:
 #define JPGENC_H
 
 #include <stdint.h>
+#include <stdio.h>
 
-typedef void jpgenc_write_func(void* context, const void *data, int size);
+typedef void jpgenc_write_func(void* context, const void *data, size_t size);
 
 typedef enum
 {
